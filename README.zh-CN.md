@@ -2,7 +2,7 @@
 
 把 [dsh-hippocampus](https://github.com/coner13/dsh-hippocampus) 里的对话导出成纯 markdown，一天一个文件。
 
-Hippocampus 擅长**检索**（翻出以前说过什么），但它不是一个档案柜。它把对话存成一行行事件流（`stream.jsonl`），不好读、不好留、重装一次就没了。
+Hippocampus 擅长**检索**（翻出以前说过什么），但它不是一个档案柜。它把对话存成一行行事件流（`stream.jsonl`）——数据本身不会丢（在 `$DSH_HOME/hippocampus/` 下，卸载、升级插件都不动它），但那是只有插件自己读得懂的格式：想用别的工具打开、想带走，都不方便。
 
 这个脚本把它变成十年后还能用记事本打开的东西。
 

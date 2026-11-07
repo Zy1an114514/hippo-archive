@@ -4,7 +4,7 @@
 
 Export [dsh-hippocampus](https://github.com/coner13/dsh-hippocampus) conversations to plain markdown, one file per day.
 
-Hippocampus is good at *recall* — searching what happened. It is not an archive. It stores an append-only event stream (`stream.jsonl`) that is awkward to read, awkward to keep, and goes away if you reinstall.
+Hippocampus is good at *recall* — searching what happened. It is not an archive. It stores an append-only event stream (`stream.jsonl`). Nothing is lost on a reinstall — the data lives in `$DSH_HOME/hippocampus/`, outside the plugin package — but the format is only readable by the plugin itself: awkward to open elsewhere, awkward to take with you.
 
 This turns it into something you can open in any text editor in ten years.
 
