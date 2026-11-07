@@ -1,0 +1,13 @@
+{
+  "name": "hippo-archive",
+  "version": "0.1.0",
+  "description": "Export dsh-hippocampus conversations to plain markdown, one file per day",
+  "type": "module",
+  "bin": {
+    "hippo-archive": "./export.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
