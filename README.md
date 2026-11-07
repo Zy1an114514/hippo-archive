@@ -1,5 +1,7 @@
 # hippo-archive
 
+**English** | [简体中文](README.zh-CN.md)
+
 Export [dsh-hippocampus](https://github.com/coner13/dsh-hippocampus) conversations to plain markdown, one file per day.
 
 Hippocampus is good at *recall* — searching what happened. It is not an archive. It stores an append-only event stream (`stream.jsonl`) that is awkward to read, awkward to keep, and goes away if you reinstall.

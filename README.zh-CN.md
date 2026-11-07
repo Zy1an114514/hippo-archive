@@ -1,0 +1,49 @@
+# hippo-archive
+
+把 [dsh-hippocampus](https://github.com/coner13/dsh-hippocampus) 里的对话导出成纯 markdown，一天一个文件。
+
+Hippocampus 擅长**检索**（翻出以前说过什么），但它不是一个档案柜。它把对话存成一行行事件流（`stream.jsonl`），不好读、不好留、重装一次就没了。
+
+这个脚本把它变成十年后还能用记事本打开的东西。
+
+## 它做什么
+
+- 读遍 `<hippocampus>/<会话>/stream.jsonl`
+- 写出 `archive/YYYY-MM-DD.md`，一天一个文件
+- **每一句话都留全文**，不摘要、不截断
+- 丢掉提示词脚手架（人格卡、记忆卡、时间戳那些注入）——那些不是谁说的话
+- 可选：每天末尾附一份工具调用统计
+
+## 用法
+
+```bash
+# 默认：~/.dsh/hippocampus -> ./archive
+node export.mjs
+
+# 指定路径
+node export.mjs --home "C:\Users\me\.dsh\hippocampus" --out "D:\日记"
+
+# 换个时区算日期分界（默认 UTC+8）
+node export.mjs --tz -7
+
+# 不要工具统计
+node export.mjs --no-tools
+```
+
+也认环境变量：`HIPPO_HOME`、`HIPPO_OUT`、`HIPPO_TZ`。
+
+要 Node 18 以上。零依赖。
+
+## 为什么一天一个文件
+
+因为一个越写越大的文件，打开会越来越慢；而且一天是最自然的单位——你想看"那天发生了什么"，直接打开那天。
+
+用纯 markdown 而不是 JSONL：**你该能在不写代码的情况下读自己的历史。**
+
+## 说明
+
+只读。它不会往你的 hippocampus 目录里写任何东西。
+
+工具调用的结果不保存，只计数——工具输出通常是机器噪音，存进去会把对话淹掉。
+
+MIT 许可。
