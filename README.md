@@ -14,8 +14,29 @@ This turns it into something you can open in any text editor in ten years.
 - Writes `archive/YYYY-MM-DD.md`, one file per day
 - Keeps the full text of every message. No summarising, no truncation
 - Groups by conversation: two sessions on the same day stay separate, instead of interleaving into what looks like one person answering themselves
-- Drops prompt scaffolding (persona blocks, memory injections, timestamps) — recognised by its shape, never by its length, so a long message from either side still makes it in
+- Drops prompt scaffolding (persona blocks, memory injections, timestamps) and the auto-generated session title — recognised by its shape, never by its length, so a long message from either side still makes it in
 - Optionally appends a per-day count of tool calls
+
+## What the output looks like
+
+```markdown
+# 2026-03-14
+
+## 会话 3f2a1b9c          <- one section per conversation ("conversation")
+
+### 09:12:03 · user
+
+这个项目的 Node 版本能不能升到 20
+
+### 09:12:07 · assistant
+
+先看一下 engines 字段和 CI 配置，再决定要改哪个。
+```
+
+Two details that look fussy and are not:
+
+- **The speaker line is a heading, not bold text.** Message bodies are full of markdown, including bold lines; a bold header is indistinguishable from the text that follows it.
+- **Conversations are separated.** Two sessions on the same day otherwise interleave by timestamp and read as one person answering themselves.
 
 ## Install
 
