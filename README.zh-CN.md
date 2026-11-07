@@ -11,7 +11,7 @@ Hippocampus 擅长**检索**（翻出以前说过什么），但它不是一个�
 - 读遍 `<hippocampus>/<会话>/stream.jsonl`
 - 写出 `archive/YYYY-MM-DD.md`，一天一个文件
 - **每一句话都留全文**，不摘要、不截断
-- 丢掉提示词脚手架（人格卡、记忆卡、时间戳那些注入）——那些不是谁说的话
+- 丢掉提示词脚手架（人格卡、记忆卡、时间戳那些注入）——按结构辨认，不按长度，所以谁说了一段很长的话也照样留下
 - 可选：每天末尾附一份工具调用统计
 
 ## 安装
@@ -56,6 +56,9 @@ node export.mjs --tz -7
 
 # 不要工具统计
 node export.mjs --no-tools
+
+# 顺带丢掉超过 1200 字的（粗暴口径，默认关闭）
+node export.mjs --drop-long
 ```
 
 也认环境变量：`HIPPO_HOME`、`HIPPO_OUT`、`HIPPO_TZ`。

@@ -13,7 +13,7 @@ This turns it into something you can open in any text editor in ten years.
 - Reads every `<hippocampus>/<session>/stream.jsonl`
 - Writes `archive/YYYY-MM-DD.md`, one file per day
 - Keeps the full text of every message. No summarising, no truncation
-- Drops prompt scaffolding (persona blocks, memory injections, timestamps) — those are not things anyone said
+- Drops prompt scaffolding (persona blocks, memory injections, timestamps) — recognised by its shape, never by its length, so a long message from either side still makes it in
 - Optionally appends a per-day count of tool calls
 
 ## Install
@@ -58,6 +58,9 @@ node export.mjs --tz -7
 
 # skip the tool-call summary
 node export.mjs --no-tools
+
+# also drop anything over 1200 characters (blunt; off by default)
+node export.mjs --drop-long
 ```
 
 Environment variables work too: `HIPPO_HOME`, `HIPPO_OUT`, `HIPPO_TZ`.

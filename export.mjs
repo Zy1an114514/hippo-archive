@@ -12,6 +12,7 @@
  *   node export.mjs --home C:\Users\me\.dsh\hippocampus --out ./archive
  *   node export.mjs --tz 8             # hours offset for date grouping (default 8)
  *   node export.mjs --no-tools         # drop the per-day tool summary
+ *   node export.mjs --drop-long        # also drop any message over 1200 chars
  *
  * Config via env also works: HIPPO_HOME, HIPPO_OUT, HIPPO_TZ
  */
@@ -31,6 +32,7 @@ const HOME = arg("home", process.env.HIPPO_HOME || path.join(os.homedir(), ".dsh
 const OUT = path.resolve(arg("out", process.env.HIPPO_OUT || path.join(process.cwd(), "archive")));
 const TZ = Number(arg("tz", process.env.HIPPO_TZ || 8));
 const SHOW_TOOLS = !has("no-tools");
+const DROP_LONG = has("drop-long");
 
 if (!fs.existsSync(HOME)) {
   console.error("hippocampus dir not found: " + HOME);
@@ -53,11 +55,24 @@ const INJECT_PREFIX = [
   "【当前时间】", "【主动找主人", "【人格卡", "【你的身份", "【系统",
   "【语气提示", "【记忆卡", "【唤醒", "【目的】", "【需求】",
 ];
+/**
+ * Length is deliberately NOT a signal. People write long messages too, and an
+ * archive that quietly drops them is worse than one that keeps a little noise.
+ * Judge the shape instead: scaffolding is a template built from labelled
+ * sections, a person speaking is not.
+ */
 function isInjection(text) {
   if (INJECT_PREFIX.some((k) => text.startsWith(k))) return true;
   if (text.includes("【目的】") || text.includes("【需求】")) return true;
-  // Real utterances are short; scaffolding blocks are long.
-  if (text.length > 1200) return true;
+  // A block assembled from two or more 【labelled sections】 is a prompt.
+  if ((text.match(/【[^】]{1,12}】/g) || []).length >= 2) return true;
+  // A dense template: several markdown headings AND a long bullet list.
+  // Either alone is something a person may well write by hand.
+  const headings = (text.match(/^#{1,4}\s/gm) || []).length;
+  const bullets = (text.match(/^\s*[-*•]\s/gm) || []).length;
+  if (headings >= 3 && bullets >= 5) return true;
+  // Opt-in escape hatch for streams that carry unusually noisy scaffolding.
+  if (DROP_LONG && text.length > 1200) return true;
   return false;
 }
 
