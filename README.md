@@ -26,11 +26,11 @@ This turns it into something you can open in any text editor in ten years.
 
 ### 09:12:03 · user
 
-这个项目的 Node 版本能不能升到 20
+can we bump this project to Node 20
 
 ### 09:12:07 · assistant
 
-先看一下 engines 字段和 CI 配置，再决定要改哪个。
+Let me check the engines field and the CI config before changing either.
 ```
 
 Two details that look fussy and are not:
