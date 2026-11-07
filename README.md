@@ -16,6 +16,34 @@ This turns it into something you can open in any text editor in ten years.
 - Drops prompt scaffolding (persona blocks, memory injections, timestamps) — those are not things anyone said
 - Optionally appends a per-day count of tool calls
 
+## Install
+
+Three ways, pick one. Node 18+.
+
+**1. Just download the file** (simplest):
+
+```bash
+curl -O https://raw.githubusercontent.com/Zy1an114514/hippo-archive/main/export.mjs
+node export.mjs
+```
+
+**2. Clone it:**
+
+```bash
+git clone https://github.com/Zy1an114514/hippo-archive.git
+cd hippo-archive
+node export.mjs
+```
+
+**3. Install as a command** (so you can run `hippo-archive` from anywhere):
+
+```bash
+npm install -g github:Zy1an114514/hippo-archive
+hippo-archive --out ./archive
+```
+
+No dependencies. Nothing to build.
+
 ## Usage
 
 ```bash

@@ -14,6 +14,34 @@ Hippocampus 擅长**检索**（翻出以前说过什么），但它不是一个�
 - 丢掉提示词脚手架（人格卡、记忆卡、时间戳那些注入）——那些不是谁说的话
 - 可选：每天末尾附一份工具调用统计
 
+## 安装
+
+三种，挑一个。要 Node 18 以上。
+
+**1. 直接下这一个文件**（最省事）：
+
+```bash
+curl -O https://raw.githubusercontent.com/Zy1an114514/hippo-archive/main/export.mjs
+node export.mjs
+```
+
+**2. 克隆下来：**
+
+```bash
+git clone https://github.com/Zy1an114514/hippo-archive.git
+cd hippo-archive
+node export.mjs
+```
+
+**3. 装成命令**（之后在任何地方都能敲 `hippo-archive`）：
+
+```bash
+npm install -g github:Zy1an114514/hippo-archive
+hippo-archive --out ./archive
+```
+
+零依赖，不用构建。
+
 ## 用法
 
 ```bash
